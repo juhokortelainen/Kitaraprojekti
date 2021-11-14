@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,6 +17,8 @@ public class Difficulty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long difficultyid;
+	
+	@NotEmpty(message = "Please enter a rating for the difficulty")
 	private String rating;
 
 	@OneToMany(mappedBy = "difficulty")
@@ -47,5 +50,12 @@ public class Difficulty {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
+
+	@Override
+	public String toString() {
+		return "Difficulty [difficultyid=" + difficultyid + ", rating=" + rating + "]";
+	}
+	
+	
 
 }

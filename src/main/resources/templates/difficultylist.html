@@ -1,7 +1,7 @@
 <! DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Songlist</title>
+<title>Difficultylist</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
 	th:href="@{css/bootstrap.min.css}" />
@@ -10,38 +10,30 @@
 
 	<nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-between">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link active" href="/songlist">Songlist</a>
+			<a class="nav-item nav-link" href="/songlist">Songlist</a>
 			<a class="nav-item nav-link" href="/tuninglist">Tuninglist</a>
-			<a class="nav-item nav-link" href="/difficultylist">Difficultylist</a>
+			<a class="nav-item nav-link active" href="/difficultylist">Difficultylist</a>
 		</div>
 		<span class="navbar-brand">Welcome [[${#httpServletRequest.remoteUser}]]</span>
 		<form class="form-inline" th:action="@{/logout}" method="post">
 			<button type="submit" class="btn btn-danger">Sign out</button>
-		</form>
+		</form>   
 	</nav>
-
+	
 	<table class="table table-hover">
 		<thead class="thead-light">
 		<tr>
-			<th>Title</th>
-			<th>Artist</th>
-			<th>Tuning</th>
-			<th>Difficulty</th>
-			<th>Tutorial</th>
+			<th>Rating</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 		</tr>
 		</thead>
-		<tr th:each="song : ${songs}">
-			<td th:text="${song.title}"></td>
-			<td th:text="${song.artist}"></td>
-			<td th:text="${song.tuning.name}"></td>
-			<td th:text="${song.difficulty.rating}"></td>
-			<td><a th:href="${song.tutorial}">Link to a lesson</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletesong/{id}(id=${song.songid})}" class="btn btn-danger">Delete</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editsong/{id}(id=${song.songid})}" class="btn btn-primary">Edit</a></td>
+		<tr th:each="difficulty : ${difficulties}">
+			<td th:text="${difficulty.rating}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletedifficulty/{id}(id=${difficulty.difficultyid})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editdifficulty/{id}(id=${difficulty.difficultyid})}" class="btn btn-primary">Edit</a></td>
 		</tr>
 	</table>
-		<a href="/addsong" class="btn btn-success">Add Song</a>
+		<a href="/adddifficulty" class="btn btn-success">Add Difficulty</a>
 </body>
 </html>

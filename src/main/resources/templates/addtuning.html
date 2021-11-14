@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a new tuning</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add a new tuning</h1>
+	<div>
+		<form th:object="${tuning}" th:action="@{/savetuning}" action="#" method="post">
+		<table>
+			<tr>
+			  	<td><label for="name">Name</label></td>
+				<td><input type="text" id="name" th:field="*{name}" /></td>
+				<td><div style="clear: both; display: block; height: 10px;"></div></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Save"></input></td>
+				<td><a href="/tuninglist" class="btn btn-success">Cancel</a></td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</body>
+</html>

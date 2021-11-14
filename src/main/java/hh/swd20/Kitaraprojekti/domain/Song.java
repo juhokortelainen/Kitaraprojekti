@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,8 +16,11 @@ public class Song {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long songid;
+	
+	@NotEmpty(message = "Please enter a name for the song")
 	private String title;
 	private String artist;
+	private String tutorial;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("songs")
@@ -27,28 +31,23 @@ public class Song {
 	@JsonIgnoreProperties("songs")
 	@JoinColumn(name = "difficultyid")
 	private Difficulty difficulty;
-	
-	@ManyToOne
-	@JsonIgnoreProperties("songs")
-	@JoinColumn(name = "tutorialid")
-	private Tutorial tutorial;
 
 	public Song() {
 		super();
 		this.title = null;
 		this.artist = null;
+		this.tutorial = null;
 		this.tuning = null;
 		this.difficulty = null;
-		this.tutorial = null;
 	}
 	
-	public Song(String title, String artist, Tuning tuning, Difficulty difficulty, Tutorial tutorial) {
+	public Song(String title, String artist, String tutorial, Tuning tuning, Difficulty difficulty) {
 		super();
 		this.title = title;
 		this.artist = artist;
+		this.tutorial = tutorial;
 		this.tuning = tuning;
 		this.difficulty = difficulty;
-		this.tutorial = tutorial;
 	}
 
 	public Long getSongid() {
@@ -74,6 +73,13 @@ public class Song {
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
+	public String getTutorial() {
+		return tutorial;
+	}
+	
+	public void setTutorial(String tutorial) {
+		this.tutorial = tutorial;
+	}
 
 	public Tuning getTuning() {
 		return tuning;
@@ -91,19 +97,14 @@ public class Song {
 		this.difficulty = difficulty;
 	}
 
-	public Tutorial getTutorial() {
-		return tutorial;
-	}
-
-	public void setTutorial(Tutorial tutorial) {
-		this.tutorial = tutorial;
-	}
-
 	@Override
 	public String toString() {
-		return "Song [songid=" + songid + ", title=" + title + ", artist=" + artist + ", tuning=" + tuning
-				+ ", difficulty=" + difficulty + ", tutorial=" + tutorial + "]";
+		return "Song [songid=" + songid + ", title=" + title + ", artist=" + artist + ", tutorial=" + tutorial
+				+ ", tuning=" + this.getTuning() + ", difficulty=" + this.getDifficulty() + "]";
 	}
+
+
+	
 	
 	
 

@@ -12,8 +12,8 @@ import hh.swd20.Kitaraprojekti.domain.Song;
 import hh.swd20.Kitaraprojekti.domain.SongRepository;
 import hh.swd20.Kitaraprojekti.domain.Tuning;
 import hh.swd20.Kitaraprojekti.domain.TuningRepository;
-import hh.swd20.Kitaraprojekti.domain.Tutorial;
-import hh.swd20.Kitaraprojekti.domain.TutorialRepository;
+import hh.swd20.Kitaraprojekti.domain.User;
+import hh.swd20.Kitaraprojekti.domain.UserRepository;
 
 @SpringBootApplication
 public class KitaraprojektiApplication {
@@ -26,7 +26,7 @@ public class KitaraprojektiApplication {
 	// creating testdata to h2-database
 	@Bean
 	public CommandLineRunner songDemo(SongRepository songrepository, TuningRepository tuningrepository,
-			DifficultyRepository difficultyrepository, TutorialRepository tutorialrepository) {
+			DifficultyRepository difficultyrepository, UserRepository userrepository) {
 		return (args) -> {
 			// create a couple of tunings
 			log.info("Save some sample tunings");
@@ -56,27 +56,28 @@ public class KitaraprojektiApplication {
 				log.info(difficulty.toString());
 			}
 			
-			// create an example link
-			log.info("Save a sample link");
-			Tutorial tutorial1 = new Tutorial("link to video lesson");
-			tutorialrepository.save(tutorial1);
-			
-			// log tutorial link from database
-			log.info("Fetch the tutorial link");
-			for (Tutorial tutorial : tutorialrepository.findAll()) {
-				log.info(tutorial.toString());
-			}
-			
 			// create a few songs to h2-database
 			log.info("Add a few songs");
-			songrepository.save(new Song("Fade To Black", "Metallica", tuning1, difficulty2, tutorial1));
-			songrepository.save(new Song("Unholy Confessions", "Avenged Sevenfold", tuning2, difficulty1, tutorial1));
-			songrepository.save(new Song("Master of Puppets", "Metallica", tuning1, difficulty3, tutorial1));
+			songrepository.save(new Song("Fade To Black", "Metallica", "https://www.youtube.com/watch?v=T10NnePvkuI", tuning1, difficulty2));
+			songrepository.save(new Song("Unholy Confessions", "Avenged Sevenfold", "https://youtu.be/cpxVJvDcpIU", tuning2, difficulty1));
+			songrepository.save(new Song("Master of Puppets", "Metallica", "https://youtu.be/FvVrCKgEu4s", tuning1, difficulty3));
 			
 			// log songs from the database
 			log.info("Fetch all songs");
 			for (Song song : songrepository.findAll()) {
 				log.info(song.toString());
+			}
+			
+			// create users: admin/admin and user/user
+			User user1 = new User("user", "$2a$10$oD37WvChWlWZJwFa.9cmXeVM9ZWW77bebZt6JvHwwdqddHf1dN/mu", "user@user.mail", "USER");
+			User user2 = new User("admin", "$2a$10$4ItnrA0QYwJx8MeXRQ7fWO6AHu.9MIaXXKvniBsePnK72DHdNIaaq", "admin@admin.mail", "ADMIN");
+			userrepository.save(user1);
+			userrepository.save(user2);
+			
+			// log users from the database
+			log.info("fetch all users");
+			for (User user : userrepository.findAll()) {
+				log.info(user.toString());
 			}
 			
 		};

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a new difficulty</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add a new difficulty</h1>
+	<div>
+		<form th:object="${difficulty}" th:action="@{/savedifficulty}" action="#" method="post">
+		<table>
+			<tr>
+			  	<td><label for="rating">Difficulty</label></td>
+				<td><input type="text" id="rating" th:field="*{rating}" /></td>
+				<td><div style="clear: both; display: block; height: 10px;"></div></td>
+				<td th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Save"></input></td>
+				<td><a href="/difficultylist" class="btn btn-success">Cancel</a></td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</body>
+</html>

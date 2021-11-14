@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit a tuning</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit a tuning</h1>
+	<div>
+		<form th:object="${tuning}" th:action="@{/savetuning}" action="#" method="post">
+			<input type="hidden" id="tuningid" th:field="*{tuningid}" value="*{tuningid}"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		  	<label for="name">Name</label>
+			<input type="text" id="name" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+	
+		  	
+			<input type="submit" value="Save"></input>
+			<a href="/tuninglist" class="btn btn-success">Cancel</a>
+		</form>
+	</div>
+</body>
+</html>
