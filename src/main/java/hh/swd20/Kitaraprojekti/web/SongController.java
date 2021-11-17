@@ -21,7 +21,7 @@ import hh.swd20.Kitaraprojekti.domain.Song;
 import hh.swd20.Kitaraprojekti.domain.SongRepository;
 import hh.swd20.Kitaraprojekti.domain.TuningRepository;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @Controller
 public class SongController {
 
