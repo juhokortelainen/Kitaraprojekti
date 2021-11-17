@@ -21,7 +21,7 @@ import hh.swd20.Kitaraprojekti.domain.Song;
 import hh.swd20.Kitaraprojekti.domain.SongRepository;
 import hh.swd20.Kitaraprojekti.domain.TuningRepository;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 public class SongController {
 
@@ -35,13 +35,13 @@ public class SongController {
 	/*********** RESTFUL SERVICES ************************/
 
 	// REST to get all songs
-	@RequestMapping(value = "/api/songs", method = RequestMethod.GET)
+	@RequestMapping(value = "/songs", method = RequestMethod.GET)
 	public @ResponseBody List<Song> bookListRest() {
 		return (List<Song>) songrepository.findAll();
 	}
 
 	// REST to get song by id
-	@RequestMapping(value = "/api/songs/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/songs/{id}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Song> findSongRest(@PathVariable("id") Long id) {
 		return songrepository.findById(id);
 	}

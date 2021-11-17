@@ -29,13 +29,13 @@ public class DifficultyController {
 	/*********** RESTFUL SERVICES ************************/
 
 	// REST to get all difficulties
-	@RequestMapping(value = "/api/difficulties", method = RequestMethod.GET)
+	@RequestMapping(value = "/difficulties", method = RequestMethod.GET)
 	public @ResponseBody List<Difficulty> difficultyListRest() {
 		return (List<Difficulty>) difficultyrepository.findAll();
 	}
 
 	// REST to get difficulty by id
-	@RequestMapping(value = "/api/difficulties/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/difficulties/{id}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Difficulty> findDifficultyRest(@PathVariable("id") Long id) {
 		return difficultyrepository.findById(id);
 	}

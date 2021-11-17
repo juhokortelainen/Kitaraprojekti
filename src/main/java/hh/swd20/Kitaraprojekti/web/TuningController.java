@@ -29,13 +29,13 @@ public class TuningController {
 	/*********** RESTFUL SERVICES ************************/
 
 	// REST to get all tunings
-	@RequestMapping(value = "/api/tunings", method = RequestMethod.GET)
+	@RequestMapping(value = "/tunings", method = RequestMethod.GET)
 	public @ResponseBody List<Tuning> tuningListRest() {
 		return (List<Tuning>) tuningrepository.findAll();
 	}
 
 	// REST to get tuning by id
-	@RequestMapping(value = "/api/tunings/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/tunings/{id}", method = RequestMethod.GET)
 	public @ResponseBody Optional<Tuning> findTuningRest(@PathVariable("id") Long id) {
 		return tuningrepository.findById(id);
 	}
