@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import hh.swd20.Kitaraprojekti.domain.Song;
 import hh.swd20.Kitaraprojekti.domain.SongRepository;
 import hh.swd20.Kitaraprojekti.domain.TuningRepository;
 
+@CrossOrigin(origins = "*")
 @Controller
 public class SongController {
 
