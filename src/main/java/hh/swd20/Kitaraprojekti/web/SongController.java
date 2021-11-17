@@ -86,7 +86,7 @@ public class SongController {
 	// edit song by id
 	@PreAuthorize(value = "hasAuthority('ADMIN')")
 	@RequestMapping(value = "/editsong/{id}", method = RequestMethod.GET)
-	public String editSong(@PathVariable("id") Long id, @Valid Song song, BindingResult bindingresult, Model model) {
+	public String editSong(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("song", songrepository.findById(id).get());
 		model.addAttribute("tunings", tuningrepository.findAll());
 		model.addAttribute("difficulties", difficultyrepository.findAll());
