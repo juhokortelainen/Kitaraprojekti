@@ -5,8 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import hh.swd20.Kitaraprojekti.domain.Difficulty;
 import hh.swd20.Kitaraprojekti.domain.DifficultyRepository;
@@ -24,6 +22,8 @@ public class KitaraprojektiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KitaraprojektiApplication.class, args);
 	}
+	
+
 
 	// creating testdata to h2-database
 	@Bean
@@ -83,5 +83,7 @@ public class KitaraprojektiApplication {
 				log.info(user.toString());
 			}
 		};
+		
+		
 	}
 }

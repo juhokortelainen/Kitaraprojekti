@@ -1,24 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit a difficulty</title>
+    <title th:text="#{editdifficulty}">Edit a difficulty</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Edit a difficulty</h1>
+	<h1 th:text="#{editdifficulty}">Edit a difficulty</h1>
 	<div>
 		<form th:object="${difficulty}" th:action="@{/savedifficulty}" action="#" method="post">
 			<input type="hidden" id="difficultyid" th:field="*{difficultyid}" value="*{difficultyid}"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
-		  	<label for="rating">Difficulty</label>
+		  	<label for="rating" th:text="#{difficulty}">Difficulty</label>
 			<input type="text" id="rating" th:field="*{rating}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 	
-		  	
-			<input type="submit" value="Save"></input>
-			<a href="/difficultylist" class="btn btn-success">Cancel</a>
+		  	<button type="submit" class="btn btn-danger" th:text="#{save}" >Save</button>
+			<a href="/difficultylist" class="btn btn-info" role="button" th:text="#{cancel}">Cancel</a>
 		</form>
+							
 	</div>
 </body>
 </html>

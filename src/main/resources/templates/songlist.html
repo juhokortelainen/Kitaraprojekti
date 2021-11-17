@@ -1,33 +1,31 @@
 <! DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Songlist</title>
+<title th:text="#{songlist}">Songlist</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
-	th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-
 	<nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-between">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link active" href="/songlist">Songlist</a>
-			<a class="nav-item nav-link" href="/tuninglist">Tuninglist</a>
-			<a class="nav-item nav-link" href="/difficultylist">Difficultylist</a>
+			<a class="nav-item nav-link active" href="/songlist" th:text="#{songlist}" >Songlist</a>
+			<a class="nav-item nav-link" href="/tuninglist" th:text="#{tuninglist}" >Tuninglist</a>
+			<a class="nav-item nav-link" href="/difficultylist" th:text="#{difficultylist}" >Difficultylist</a>
 		</div>
-		<span class="navbar-brand">Welcome [[${#httpServletRequest.remoteUser}]]</span>
+		<span class="navbar-brand" th:text="#{welcome}" >Welcome [[${#httpServletRequest.remoteUser}]]</span>
 		<form class="form-inline" th:action="@{/logout}" method="post">
-			<button type="submit" class="btn btn-danger">Sign out</button>
+			<button type="submit" class="btn btn-danger" th:text="#{signout}" >Sign out</button>
 		</form>
 	</nav>
 
 	<table class="table table-hover">
 		<thead class="thead-light">
 		<tr>
-			<th>Title</th>
-			<th>Artist</th>
-			<th>Tuning</th>
-			<th>Difficulty</th>
-			<th>Tutorial</th>
+			<th th:text="#{title}">Title</th>
+			<th th:text="#{artist}">Artist</th>
+			<th th:text="#{tuning}">Tuning</th>
+			<th th:text="#{difficulty}">Difficulty</th>
+			<th th:text="#{tutorial}">Tutorial</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -37,11 +35,43 @@
 			<td th:text="${song.artist}"></td>
 			<td th:text="${song.tuning.name}"></td>
 			<td th:text="${song.difficulty.rating}"></td>
-			<td><a th:href="${song.tutorial}">Link to a lesson</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletesong/{id}(id=${song.songid})}" class="btn btn-danger">Delete</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editsong/{id}(id=${song.songid})}" class="btn btn-primary">Edit</a></td>
+			<td><a th:href="${song.tutorial}" th:text="#{link}" >Link to a lesson</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')">
+				<form th:action="@{/deletesong/{id}(id=${song.songid})}" method="get">
+					<button type="submit" class="btn btn-danger" th:text="#{delete}" >Delete</button>
+				</form>
+			</td>
+			<td sec:authorize="hasAuthority('ADMIN')">
+				<form th:action="@{/editsong/{id}(id=${song.songid})}" method="get">
+					<button type="submit" class="btn btn-primary" th:text="#{edit}" >Edit</button>
+				</form>
+			</td>
 		</tr>
 	</table>
-		<a href="/addsong" class="btn btn-success">Add Song</a>
+	<form th:action="@{/addsong}" method="get">
+		<button type="submit" class="btn btn-success" th:text="#{addsong}" >Add Song</button>
+	</form>
+
+	<span th:text="#{lang.change}"></span>:
+		<select id="locales">
+			<option value=""></option>
+			<option value="en" th:text="#{lang.eng}"></option>
+			<option value="de" th:text="#{lang.de}"></option>
+		</select>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(
+			function() {
+				$("#locales").change(
+				function() {
+					var selectedOption = $('#locales').val();
+					if (selectedOption != '') {
+						window.location
+						.replace('songlist?lang=' + selectedOption);
+					}
+				});
+			});
+	</script>
 </body>
 </html>

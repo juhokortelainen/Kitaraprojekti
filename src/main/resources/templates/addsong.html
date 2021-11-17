@@ -1,49 +1,47 @@
 <! DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Add a song</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title th:text="#{addsong}">Add a song</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-	<h1>Add a song</h1>
+	<h1 th:text="#{addsong}">Add a song</h1>
 	<div>
 		<form th:object="${song}" th:action="@{/savesong}" action="#" method="post">
 			<table>
 				<tr>
-					<td><label for="title">Title</label></td>
+					<td th:text="#{title}">><label for="title">Title</label></td>
 					<td><input type="text" id="title" th:field="*{title}" /></td>
 					<td><div style="clear: both; display: block; height: 10px;"></div></td>
 					<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></td>
 				</tr>
 				<tr>
-					<td><label for="artist">Artist</label></td>
+					<td th:text="#{artist}"><label for="artist">Artist</label></td>
 					<td><input type="text" id="artist" th:field="*{artist}" /></td>
 					<td><div style="clear: both; display: block; height: 10px;"></div></td>
 				</tr>
 				<tr>				
-					<td><label for="tuninglist">Tuning</label></td>
+					<td th:text="#{tuning}"><label for="tuninglist">Tuning</label></td>
 					<td><select id="tuninglist" th:field=*{tuning} class="form-control" name="Tuning">
 						<option th:each="tuning:${tunings}" th:value="${tuning.tuningid}" th:text="${tuning.name}"></option>
 					</select></td>
 					<td><div style="clear: both; display: block; height: 10px;"></div></td>
 				</tr>
 				<tr>
-					<td><label for="difficultylist">Difficulty</label></td>
+					<td th:text="#{difficulty}"><label for="difficultylist">Difficulty</label></td>
 					<td><select id="difficultylist" th:field=*{difficulty} class="form-control" name="Difficulty">
 						<option th:each="difficulty:${difficulties}" th:value="${difficulty.difficultyid}" th:text="${difficulty.rating}"></option>
 					</select></td>
 					<td><div style="clear: both; display: block; height: 10px;"></div>
 				</tr>
 				<tr>
-					<td><label for="tutorial">Tutorial</label></td>
+					<td th:text="#{tutorial}"><label for="tutorial">Tutorial</label></td>
 					<td><input type="text" id="tutorial" th:field="*{tutorial}" /></td>
 					<td><div style="clear: both; display: block; height: 10px;"></div></td>
 				</tr>
-				<tr>
-					<td><input type="submit" value="Save"></input></td>
-					<td><a href="/songlist" class="btn btn-success">Cancel</a></td>
-				</tr>	
 			</table>		
+			<button type="submit" class="btn btn-danger" th:text="#{save}" >Save</button>
+			<a href="/songlist" class="btn btn-info" role="button" th:text="#{cancel}">Cancel</a>
 		</form>
 	</div>
 </body>

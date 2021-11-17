@@ -1,7 +1,7 @@
 <! DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Difficultylist</title>
+<title th:text="#{difficultylist}">Difficultylist</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
 	th:href="@{css/bootstrap.min.css}" />
@@ -10,30 +10,62 @@
 
 	<nav class="navbar navbar-dark bg-dark navbar-expand-lg justify-content-between">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link" href="/songlist">Songlist</a>
-			<a class="nav-item nav-link" href="/tuninglist">Tuninglist</a>
-			<a class="nav-item nav-link active" href="/difficultylist">Difficultylist</a>
+			<a class="nav-item nav-link" href="/songlist" th:text="#{songlist}" >Songlist</a>
+			<a class="nav-item nav-link" href="/tuninglist" th:text="#{tuninglist}" >Tuninglist</a>
+			<a class="nav-item nav-link active" href="/difficultylist" th:text="#{difficultylist}" >Difficultylist</a>
 		</div>
-		<span class="navbar-brand">Welcome [[${#httpServletRequest.remoteUser}]]</span>
+		<span class="navbar-brand" th:text="#{welcome}" >Welcome [[${#httpServletRequest.remoteUser}]]</span>
 		<form class="form-inline" th:action="@{/logout}" method="post">
-			<button type="submit" class="btn btn-danger">Sign out</button>
-		</form>   
+			<button type="submit" class="btn btn-danger" th:text="#{signout}" >Sign out</button>
+		</form>
 	</nav>
 	
 	<table class="table table-hover">
 		<thead class="thead-light">
 		<tr>
-			<th>Rating</th>
+			<th th:text="#{rating}">Rating</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
 		</tr>
 		</thead>
 		<tr th:each="difficulty : ${difficulties}">
 			<td th:text="${difficulty.rating}"></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletedifficulty/{id}(id=${difficulty.difficultyid})}" class="btn btn-danger">Delete</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editdifficulty/{id}(id=${difficulty.difficultyid})}" class="btn btn-primary">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')">
+				<form th:action="@{/deletedifficulty/{id}(id=${difficulty.difficultyid})}" method="get">
+					<button type="submit" class="btn btn-danger" th:text="#{delete}" >Delete</button>
+				</form>
+			</td>
+			<td sec:authorize="hasAuthority('ADMIN')">
+				<form th:action="@{/editdifficulty/{id}(id=${difficulty.difficultyid})}" method="get">
+					<button type="submit" class="btn btn-primary" th:text="#{edit}" >Edit</button>
+				</form>
+			</td>
 		</tr>
 	</table>
-		<a href="/adddifficulty" class="btn btn-success">Add Difficulty</a>
+	<form th:action="@{/adddifficulty}" method="get">
+		<button type="submit" class="btn btn-success" th:text="#{adddifficulty}" >Add Difficulty</button>
+	</form>
+	
+	<span th:text="#{lang.change}"></span>:
+		<select id="locales">
+			<option value=""></option>
+			<option value="en" th:text="#{lang.eng}"></option>
+			<option value="de" th:text="#{lang.de}"></option>
+		</select>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(
+			function() {
+				$("#locales").change(
+				function() {
+					var selectedOption = $('#locales').val();
+					if (selectedOption != '') {
+						window.location
+						.replace('difficultylist?lang=' + selectedOption);
+					}
+				});
+			});
+	</script>
 </body>
 </html>
