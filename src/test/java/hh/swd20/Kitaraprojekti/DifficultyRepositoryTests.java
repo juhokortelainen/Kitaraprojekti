@@ -20,6 +20,7 @@ public class DifficultyRepositoryTests {
 	@Autowired
 	private DifficultyRepository difficultyRepository;
 
+	// test to create a new difficulty
 	@Test
 	public void createNewDifficulty() {
 		Difficulty difficulty = new Difficulty("Impossible");
@@ -27,6 +28,7 @@ public class DifficultyRepositoryTests {
 		assertThat(difficulty.getDifficultyid()).isNotNull();
 	}
 
+	// test to delete a difficulty by id
 	@Test
 	public void deleteDifficulty() {
 		Difficulty difficulty = difficultyRepository.findById(Long.valueOf(4)).get();
@@ -35,6 +37,7 @@ public class DifficultyRepositoryTests {
 		assertThat(deleteDifficulty).isEmpty();
 	}
 
+	// test to search a difficulty by id
 	@Test
 	public void searchDifficulty() {
 		Difficulty difficulty = new Difficulty("Impossible+");

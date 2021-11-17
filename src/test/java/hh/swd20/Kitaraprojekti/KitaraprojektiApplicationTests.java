@@ -20,6 +20,7 @@ public class KitaraprojektiApplicationTests {
 	@Autowired private TuningController tuningController;
 	@Autowired private DifficultyController difficultyController;
 
+	// test to check that application loads controllers
 	@Test
 	public void contextLoads() throws Exception {
 		assertThat(songController).isNotNull();

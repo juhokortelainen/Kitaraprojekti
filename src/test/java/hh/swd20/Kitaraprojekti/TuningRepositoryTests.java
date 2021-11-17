@@ -20,6 +20,7 @@ public class TuningRepositoryTests {
 	@Autowired
 	private TuningRepository tuningRepository;
 
+	// test to create a new tuning
 	@Test
 	public void createNewTuning() {
 		Tuning tuning = new Tuning("Drop B");
@@ -27,6 +28,7 @@ public class TuningRepositoryTests {
 		assertThat(tuning.getTuningid()).isNotNull();
 	}
 
+	// test to delete a tuning by id
 	@Test
 	public void deleteTuning() {
 		Tuning tuning = tuningRepository.findById(Long.valueOf(2)).get();
@@ -35,6 +37,7 @@ public class TuningRepositoryTests {
 		assertThat(deleteTuning).isEmpty();
 	}
 
+	// test to search a tuning by id
 	@Test
 	public void searchTuning() {
 		Tuning tuning = new Tuning("Half step down");

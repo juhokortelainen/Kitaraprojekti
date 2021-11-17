@@ -28,6 +28,7 @@ public class KitaraprojektiApplication {
 	public CommandLineRunner songDemo(SongRepository songrepository, TuningRepository tuningrepository,
 			DifficultyRepository difficultyrepository, UserRepository userrepository) {
 		return (args) -> {
+			
 			// create a couple of tunings
 			log.info("Save some sample tunings");
 			Tuning tuning1 = new Tuning("Standard");
@@ -79,8 +80,6 @@ public class KitaraprojektiApplication {
 			for (User user : userrepository.findAll()) {
 				log.info(user.toString());
 			}
-			
 		};
 	}
-
 }

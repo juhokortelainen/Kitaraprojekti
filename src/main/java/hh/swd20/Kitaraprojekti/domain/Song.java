@@ -102,10 +102,4 @@ public class Song {
 		return "Song [songid=" + songid + ", title=" + title + ", artist=" + artist + ", tutorial=" + tutorial
 				+ ", tuning=" + this.getTuning() + ", difficulty=" + this.getDifficulty() + "]";
 	}
-
-
-	
-	
-	
-
 }

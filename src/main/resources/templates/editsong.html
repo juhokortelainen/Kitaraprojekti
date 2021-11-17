@@ -17,7 +17,6 @@
 		  			<td><label for="title">Title</label></td>
 					<td><input type="text" id="title" th:field="*{title}" value="*{title}" /></td>
 					<td><div style="clear: both; display: block; height: 10px;"></div></td>
-					<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:action="@{/editsong}"></td>
 				</tr>
 				<tr>
 				  	<td><label for="artist">Artist</label></td>
